@@ -2,8 +2,17 @@
 import type { LayoutProps } from "../types";
 import "../styles/global.css";
 
-const { title } = Astro.props as LayoutProps;
+const { title, currentPath } = Astro.props as LayoutProps;
 
+const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/projects", label: "Projects" },
+    { href: "/contact", label: "Contact" },
+];
+
+const siteName = "Roshan Parida";
+const pageTitle = title ? `${title} | ${siteName}` : siteName;
 const currentYear = new Date().getFullYear();
 ---
 
@@ -11,20 +20,42 @@ const currentYear = new Date().getFullYear();
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="description" content="Astro description" />
-        <meta name="viewport" content="width=device-width" />
+        <meta
+            name="description"
+            content="Portfolio of [Your Name], a BCA student and aspiring developer."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <title>{title} | Roshan Parida/Portfolio</title>
+        <title>{pageTitle}</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+            rel="stylesheet"
+        />
     </head>
     <body>
         <header>
-            <h1><a href="/" aria-label="Homepage">Roshan Parida</a></h1>
+            <a href="/" class="site-logo" aria-label="Homepage">
+                <span class="logo-icon" aria-hidden="true">&lt;/&gt;</span>
+                <span class="logo-text">{siteName}</span>
+            </a>
             <nav>
-                <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/projects">Projects</a>
-                <a href="/contact">Contact</a>
+                {
+                    navLinks.map((link) => (
+                        <a
+                            href={link.href}
+                            aria-current={
+                                currentPath === link.href ? "page" : false
+                            }
+                        >
+                            {link.label}
+                        </a>
+                    ))
+                }
             </nav>
         </header>
 
@@ -33,7 +64,43 @@ const currentYear = new Date().getFullYear();
         </main>
 
         <footer>
-            &copy; {currentYear} Roshan Parida. All rights reserved.
+            &copy; {currentYear}
+            {siteName}. Made with <span class="heart" aria-label="love">❤️</span
+            > using Astro.
         </footer>
+        <a href="#main-content" class="skip-link">Skip to main content</a>
     </body>
 </html>
+
+<style is:global>
+    /* Make skip link visually hidden until focused */
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: var(--accent);
+        color: var(--bg-primary);
+        padding: 8px;
+        z-index: 100;
+        transition: top 0.3s ease;
+    }
+
+    .skip-link:focus {
+        top: 0;
+    }
+
+    /* Add ID to main tag for skip link target */
+    main {
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        position: relative;
+        scroll-margin-top: 5rem;
+        id: main-content;
+    }
+
+    .heart {
+        color: #e25555;
+        display: inline-block;
+        transform: scale(1.1);
+    }
+</style>

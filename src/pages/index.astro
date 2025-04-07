@@ -4,78 +4,159 @@ import ProjectCard from "../components/ProjectCard.astro";
 import type { Project } from "../types";
 
 const featuredProject: Project = {
-    title: "Flux: Music Streaming Site",
+    title: "Astro Portfolio",
     description:
-        "Music streaming site built with React and Node.js. Features user authentication, playlist management, and a sleek UI.",
-    link: "https://github.com/roshan-parida/flux",
-    tags: ["Vitejs", "Javascript", "MERN", "Nodejs"],
+        "This very portfolio site! Built with Astro, vanilla CSS, and a focus on clean code and performance.",
+    link: "https://github.com/yourusername/astro-portfolio", // Update link
+    tags: ["Astro", "CSS", "Responsive", "Portfolio", "UI/UX"],
 };
+
+const name = "[Roshan Parida]";
 ---
 
-<Layout title="Home">
+<Layout title="Home" currentPath={Astro.url.pathname}>
     <section class="hero">
-        <h1>Hi, I'm Roshan Parida</h1>
+        <h1 class="hero-title">
+            <span class="greeting">Hi, I'm</span>
+            <span class="name">{name}</span>
+        </h1>
         <p class="typewriter-text">
-            Aspiring Developer | BCA Student | Tech Enthusiast
+            BCA Student // Aspiring Developer // Linux Enthusiast
         </p>
-        <p class="intro-text">
-            Exploring the world of code and building cool things for the web.
-            Currently focused on expanding my skills in web development and
-            software engineering. Based in Delhi, India.
+        <p class="intro-text sans-serif-text">
+            Based in Delhi, India, I'm diving into web development and software
+            engineering, building efficient and user-friendly applications.
+            Let's create something amazing!
         </p>
-        <a href="/about" class="inline-link">Learn more about me</a>
+        <div class="hero-actions">
+            <a href="/projects" class="cta-button primary">View Projects</a>
+            <a href="/contact" class="cta-button secondary">Contact Me</a>
+        </div>
     </section>
 
     <section>
         <h2>// Featured Project</h2>
-        <ProjectCard project={featuredProject} />
+        <div class="featured-project-wrapper">
+            <ProjectCard project={featuredProject} index={0} />
+        </div>
         <div class="view-all-link">
-            <a href="/projects" class="inline-link">View all projects</a>
+            <a href="/projects" class="inline-link">See all projects</a>
         </div>
     </section>
-
-    <!-- <section>
-        <h2>// Latest Thoughts (Optional Blog Teaser)</h2>
-        <p>
-            Check out my latest blog post about [Topic]... <a
-                href="/blog"
-                class="inline-link">Read more</a
-            >
-        </p>
-    </section> -->
 </Layout>
 
 <style>
     .hero {
         text-align: center;
-        padding: 2rem 0 3rem 0;
-        border-bottom: 1px solid var(--border);
-        margin-bottom: 3rem;
+        padding: var(--space-12) 0;
+        margin-bottom: var(--space-12);
+        position: relative;
+        /* Optional: Add subtle background pattern or gradient */
+        background: radial-gradient(
+            ellipse at bottom,
+            var(--bg-secondary),
+            var(--bg-primary) 70%
+        );
     }
 
-    .hero h1 {
+    .hero-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        line-height: 1.1;
+        margin-bottom: var(--space-4);
         color: var(--text-primary);
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-        font-family: var(--font-sans);
+        font-family: var(--font-mono);
+        font-weight: 700;
         border-bottom: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .greeting {
+        font-size: 0.4em;
+        color: var(--text-secondary);
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: var(--space-1);
+    }
+    .name {
+        color: var(--accent);
+    }
+
+    .typewriter-text {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        margin-bottom: var(--space-8);
     }
 
     .intro-text {
         max-width: 600px;
-        margin: 0 auto 1.5rem auto;
+        margin: 0 auto var(--space-8) auto;
         color: var(--text-secondary);
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+    .sans-serif-text {
+        font-family: var(--font-sans);
+    }
+
+    .hero-actions {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-6);
+        flex-wrap: wrap;
+    }
+
+    .cta-button {
+        font-family: var(--font-mono);
         font-size: 1rem;
-        line-height: 1.7;
+        font-weight: 700;
+        padding: var(--space-3) var(--space-8);
+        border-radius: 8px;
+        text-decoration: none;
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            background-color 0.2s ease,
+            color 0.2s ease;
+        display: inline-block;
+        border: 1px solid transparent;
+    }
+    .cta-button.primary {
+        background-color: var(--accent);
+        color: var(--bg-primary);
+        border-color: var(--accent);
+        box-shadow: 0 4px 10px rgba(78, 154, 255, 0.3);
+    }
+    .cta-button.primary:hover {
+        background-color: var(--accent-hover);
+        border-color: var(--accent-hover);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(78, 154, 255, 0.4);
+        color: var(--bg-primary);
+        text-decoration: none;
+    }
+
+    .cta-button.secondary {
+        background-color: transparent;
+        color: var(--accent);
+        border-color: var(--accent);
+    }
+    .cta-button.secondary:hover {
+        background-color: rgba(78, 154, 255, 0.1);
+        color: var(--accent-hover);
+        border-color: var(--accent-hover);
+        transform: translateY(-3px);
+        text-decoration: none;
+    }
+
+    .featured-project-wrapper {
+        max-width: 600px;
+        margin: 0 auto;
     }
 
     .view-all-link {
-        margin-top: 1.5rem;
-        text-align: right;
-    }
-
-    .typewriter-text {
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
+        margin-top: var(--space-8);
+        text-align: center;
     }
 </style>

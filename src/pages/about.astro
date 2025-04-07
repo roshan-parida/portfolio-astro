@@ -14,43 +14,88 @@ const skills = [
     "Git",
     "Linux",
     "Responsive Design",
+    "Web Accessibility",
+    "UI/UX Principles",
+    "REST APIs",
 ];
 ---
 
-<!-- pages/about.astro -->
-<Layout title="About Me">
+<Layout title="About Me" currentPath={Astro.url.pathname}>
     <h1>// About Me</h1>
 
     <div class="about-container">
-        <div class="about-image">
-            <div class="profile-placeholder"></div>
-            <h3>BCA Student & Aspiring Developer</h3>
-            <p class="profile-subtitle">
-                Building digital experiences, one line of code at a time.
-            </p>
-        </div>
+        <aside class="about-sidebar">
+            <div class="profile-card">
+                <div class="profile-placeholder">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="64"
+                        height="64"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-terminal"
+                        ><polyline points="4 17 10 11 4 5"></polyline><line
+                            x1="12"
+                            y1="19"
+                            x2="20"
+                            y2="19"></line></svg
+                    >
+                </div>
+                <h3>[Your Name]</h3>
+                <p class="profile-subtitle">BCA Student & Aspiring Developer</p>
+                <div class="location">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-map-pin"
+                        ><path
+                            d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                        ></path><circle cx="12" cy="10" r="3"></circle></svg
+                    >
+                    Delhi, India
+                </div>
+            </div>
+        </aside>
 
-        <div class="about-content">
-            <p>
+        <section class="about-content">
+            <p class="sans-serif-text">
                 Hello! I'm currently pursuing my Bachelor of Computer
                 Applications (BCA) and am passionate about diving deep into the
-                world of programming and web development. I enjoy tackling
-                complex problems and strive to create solutions that are both
-                efficient and elegant.
+                world of programming and web development. I enjoy the challenge
+                of solving complex problems and strive to create solutions that
+                are not only efficient and functional but also provide a great
+                user experience.
             </p>
-            <p>
+            <p class="sans-serif-text">
+                Working with Linux Mint on my laptop feels like home, and I'm
+                constantly exploring new tools and technologies within the
+                open-source ecosystem. My goal is to build practical, innovative
+                applications while continuously learning and refining my craft
+                in software engineering and web development.
+            </p>
+            <p class="sans-serif-text">
                 Beyond the screen, you'll often find me immersed in manga,
                 anime, games, or exploring captivating web series and movies. I
                 find these creative pursuits often spark new ideas and
-                perspectives that I bring back to my coding projects. My goal is
-                to build practical, innovative applications.
+                perspectives that I bring back to my coding projects.
             </p>
 
-            <h3 class="skills-heading">// Skills</h3>
+            <h2 class="skills-heading">// Skills & Tools</h2>
             <div class="skills-list">
                 {skills.map((skill) => <span class="skill-tag">{skill}</span>)}
             </div>
-        </div>
+        </section>
     </div>
 </Layout>
 
@@ -58,112 +103,133 @@ const skills = [
     .about-container {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 2rem;
-        margin-top: 2rem;
+        gap: var(--space-10);
+        margin-top: var(--space-8);
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 840px) {
         .about-container {
-            grid-template-columns: 1fr 2fr;
-            align-items: start;
+            grid-template-columns: 280px 1fr;
         }
     }
 
-    .about-image {
-        background-color: var(--bg-secondary);
-        border-radius: 6px;
-        padding: 2rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        border: 1px solid var(--border);
+    .about-sidebar {
+        position: sticky;
+        top: calc(var(--space-8) + 60px);
+        align-self: start;
         height: fit-content;
     }
 
+    .profile-card {
+        background-color: var(--bg-secondary);
+        border-radius: 12px;
+        padding: var(--space-8);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border: 1px solid var(--border);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
     .profile-placeholder {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
-        background-color: var(--border);
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 1.5rem;
-        border: 3px solid var(--bg-primary);
-        box-shadow: 0 0 0 3px var(--accent);
+        background: linear-gradient(
+            135deg,
+            var(--accent) 0%,
+            var(--syntax-function) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-6);
+        border: 4px solid var(--bg-primary);
+        box-shadow: 0 0 15px rgba(78, 154, 255, 0.3);
     }
 
-    .profile-placeholder::before {
-        content: "</>";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-family: var(--font-mono);
-        font-size: 3rem;
-        color: var(--accent);
+    .profile-placeholder svg {
+        width: 50px;
+        height: 50px;
+        stroke: var(--bg-primary);
+        stroke-width: 1.5;
     }
 
-    .about-image h3 {
+    .profile-card h3 {
         font-family: var(--font-mono);
         color: var(--text-primary);
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+        margin-bottom: var(--space-1);
+        font-weight: 700;
     }
 
     .profile-subtitle {
         color: var(--text-secondary);
+        font-size: 0.95rem;
+        margin-bottom: var(--space-4);
+        font-family: var(--font-sans);
+        line-height: 1.5;
+    }
+
+    .location {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
         font-size: 0.9rem;
-        line-height: 1.4;
+        color: var(--text-secondary);
+        font-family: var(--font-mono);
+    }
+    .location svg {
+        stroke: var(--accent);
     }
 
     .about-content {
-        background-color: var(--bg-secondary);
-        padding: 1.5rem 2rem;
-        border-radius: 6px;
-        border: 1px solid var(--border);
+        padding: var(--space-4) 0;
     }
 
-    .about-content p {
-        margin-bottom: 1rem;
+    .about-content p.sans-serif-text {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.8;
         color: var(--text-secondary);
-        font-size: 0.95rem;
-    }
-    .about-content p:last-of-type {
-        margin-bottom: 2rem;
+        margin-bottom: var(--space-6);
     }
 
     .skills-heading {
-        margin-top: 0;
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-        font-family: var(--font-mono);
-        color: var(--accent);
-        font-size: 1.25rem;
-        border-bottom: 1px solid var(--border);
+        margin-top: var(--space-10);
+        margin-bottom: var(--space-6);
     }
 
     .skills-list {
-        margin-top: 1rem;
         display: flex;
         flex-wrap: wrap;
-        gap: 0.75rem;
+        gap: var(--space-3);
     }
 
     .skill-tag {
-        display: inline-block;
-        background-color: rgba(88, 166, 255, 0.1);
-        color: var(--accent);
-        padding: 0.3rem 0.8rem;
-        border-radius: 20px;
-        font-size: 0.75rem;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        background-color: var(--bg-secondary);
+        color: var(--text-secondary);
+        padding: var(--space-2) var(--space-4);
+        border-radius: 6px;
+        font-size: 0.85rem;
         font-family: var(--font-mono);
-        border: 1px solid rgba(88, 166, 255, 0.3);
+        border: 1px solid var(--border);
         line-height: 1.4;
-        transition: background-color 0.2s ease;
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease;
+        cursor: default;
     }
     .skill-tag:hover {
-        background-color: rgba(88, 166, 255, 0.2);
+        background-color: rgba(78, 154, 255, 0.1);
+        color: var(--accent);
+        border-color: var(--accent);
+        transform: translateY(-2px);
     }
 </style>

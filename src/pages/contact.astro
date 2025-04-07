@@ -2,39 +2,56 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Contact Me">
+<Layout title="Contact Me" currentPath={Astro.url.pathname}>
     <h1>// Get In Touch</h1>
 
     <div class="contact-container">
-        <div class="terminal-container">
-            <div class="terminal-header">
+        <section class="terminal-container">
+            <header class="terminal-header">
                 <div class="terminal-dots">
-                    <div class="terminal-dot red"></div>
-                    <div class="terminal-dot yellow"></div>
-                    <div class="terminal-dot green"></div>
+                    <div
+                        class="terminal-dot"
+                        style="background-color: #ff5f56;"
+                    >
+                    </div>
+                    <div
+                        class="terminal-dot"
+                        style="background-color: #ffbd2e;"
+                    >
+                    </div>
+                    <div
+                        class="terminal-dot"
+                        style="background-color: #27c93f;"
+                    >
+                    </div>
                 </div>
-                <div class="terminal-title">contact.sh</div>
-            </div>
+                <div class="terminal-title">~/contact</div>
+            </header>
             <div class="terminal-body">
                 <p>
-                    <span class="prompt">$</span>
+                    <span class="prompt">~ $</span>
                     <span class="command">echo</span>
-                    <span class="string">"Let's connect!"</span>
+                    <span class="string">"Feel free to reach out!"</span>
                 </p>
                 <p>
-                    <span class="prompt">$</span>
-                    <span class="command">cat</span> contact_info.txt
+                    <span class="prompt">~ $</span>
+                    <span class="command">cat</span> contact.info
                 </p>
-                <pre><code>
-Email:    <a href="mailto:roshanparida24@gmail.com">roshanparida24@gmail.com</a>
-GitHub:   <a href="https://github.com/roshan-parida" target="_blank" rel="noopener noreferrer">github.com/roshan-parida</a>
-LinkedIn: <a href="https://www.linkedin.com/in/roshan-parida" target="_blank" rel="noopener noreferrer">linkedin.com/in/roshan-parida</a>
-        </code></pre>
+                <pre><code class="language-ini">
+[Contact]
+Email    = <a href="mailto:dev@example.com">dev@example.com</a>
+GitHub   = <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">github.com/yourusername</a>
+LinkedIn = <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">linkedin.com/in/yourusername</a>
+</code></pre>
+                <p>
+                    <span class="prompt">~ $</span>
+                    <span class="cursor">▋</span>
+                </p>
             </div>
-        </div>
+        </section>
 
-        <div class="contact-form-container">
-            <h2>Send a Message</h2>
+        <section class="contact-form-container">
+            <h2>Send a Direct Message</h2>
             <form
                 class="contact-form"
                 name="contact"
@@ -43,23 +60,54 @@ LinkedIn: <a href="https://www.linkedin.com/in/roshan-parida" target="_blank" re
             >
                 <input type="hidden" name="form-name" value="contact" />
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required />
+                    <label for="name">Your Name:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        placeholder="Ada Lovelace"
+                    />
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required />
+                    <label for="email">Your Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        placeholder="ada@example.com"
+                    />
                 </div>
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required
+                    <label for="message">Message:</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="6"
+                        required
+                        placeholder="Let's build something cool together..."
                     ></textarea>
                 </div>
-                <button type="submit"
-                    >Send Message <span aria-hidden="true">→</span></button
-                >
+                <button type="submit">
+                    Send Message
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-send"
+                        ><line x1="22" y1="2" x2="11" y2="13"></line><polygon
+                            points="22 2 15 22 11 13 2 9 22 2"></polygon></svg
+                    >
+                </button>
             </form>
-        </div>
+        </section>
     </div>
 </Layout>
 
@@ -67,123 +115,134 @@ LinkedIn: <a href="https://www.linkedin.com/in/roshan-parida" target="_blank" re
     .contact-container {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 3rem;
-        margin-top: 2rem;
+        gap: var(--space-10);
+        margin-top: var(--space-8);
     }
 
-    @media (min-width: 800px) {
+    @media (min-width: 900px) {
         .contact-container {
             grid-template-columns: 1fr 1fr;
             align-items: start;
+            gap: var(--space-12);
         }
     }
 
     /* Terminal Styles */
     .terminal-container {
         border: 1px solid var(--border);
-        border-radius: 6px;
+        border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         background-color: var(--bg-secondary);
+        height: fit-content;
     }
 
     .terminal-header {
-        background-color: var(--bg-primary);
-        padding: 0.5rem 1rem;
+        padding: var(--space-3) var(--space-4);
         display: flex;
         align-items: center;
         border-bottom: 1px solid var(--border);
+        background-color: var(--bg-primary);
     }
 
     .terminal-dots {
         display: flex;
-        gap: 0.5rem;
+        gap: var(--space-2);
     }
-
     .terminal-dot {
         width: 12px;
         height: 12px;
         border-radius: 50%;
     }
-    .terminal-dot.red {
-        background-color: #ff5f56;
-    }
-    .terminal-dot.yellow {
-        background-color: #ffbd2e;
-    }
-    .terminal-dot.green {
-        background-color: #27c93f;
-    }
 
     .terminal-title {
         flex-grow: 1;
         text-align: center;
-        font-family: var(--font-mono);
-        font-size: 0.875rem;
+        font-size: 0.85rem;
         color: var(--text-secondary);
-        padding-right: 36px;
+        padding-right: 44px;
     }
 
     .terminal-body {
-        padding: 1.5rem;
-        font-family: var(--font-mono);
-        position: relative;
-        color: var(--text-primary);
+        padding: var(--space-6) var(--space-6) var(--space-4) var(--space-6);
+        font-size: 0.9rem;
+        line-height: 1.7;
     }
 
     .terminal-body p {
-        margin-bottom: 0.75rem;
+        margin-bottom: var(--space-3);
         display: flex;
-        align-items: center;
-        gap: 0.5ch;
+        align-items: baseline;
+        gap: 0.6ch;
     }
 
-    .terminal-body .prompt {
+    .prompt {
         color: var(--accent);
-        font-weight: bold;
+        font-weight: 700;
     }
-    .terminal-body .command {
+    .command {
         color: var(--syntax-keyword);
     }
-    .terminal-body .string {
+    .string {
         color: var(--syntax-string);
     }
 
     .terminal-body pre {
-        margin: 1rem 0 0 0;
-        padding: 1rem;
+        margin: var(--space-4) 0 0 0;
+        padding: var(--space-4);
         background-color: var(--bg-primary);
-        border: none;
+        border: 1px solid var(--border);
         border-radius: 4px;
     }
 
     .terminal-body pre code {
         font-size: 0.85rem;
         line-height: 1.6;
-        color: var(--text-secondary);
+        color: var(--text-primary);
     }
+    /* Style comments and keywords within the code block */
+    .terminal-body pre code .token.comment {
+        color: var(--syntax-comment);
+    }
+    .terminal-body pre code .token.keyword {
+        color: var(--syntax-attr-name);
+    } /* Different color for ini keys */
+    .terminal-body pre code .token.string {
+        color: var(--syntax-string);
+    } /* For values if needed */
     .terminal-body pre code a {
-        color: var(--accent);
+        color: var(--syntax-string);
         text-decoration: underline;
+        text-underline-offset: 2px;
     }
     .terminal-body pre code a:hover {
-        color: #7eb6ff;
+        color: var(--accent-hover);
     }
 
-    /* Contact Form Styles */
+    .cursor {
+        /* Blinking cursor */
+        display: inline-block;
+        background-color: var(--text-primary);
+        width: 0.6em;
+        height: 1.1em;
+        animation: blink 1s step-end infinite;
+        margin-left: 0.2ch;
+        vertical-align: baseline;
+    }
+    @keyframes blink {
+        50% {
+            background-color: transparent;
+        }
+    }
+
     .contact-form-container h2 {
-        color: var(--accent);
-        font-family: var(--font-mono);
-        margin-bottom: 1.5rem;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 0.75rem;
-        font-size: 1.5rem;
+        margin-bottom: var(--space-6);
     }
 
     .contact-form {
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
+        gap: var(--space-6);
     }
 
     .form-group {
@@ -192,60 +251,78 @@ LinkedIn: <a href="https://www.linkedin.com/in/roshan-parida" target="_blank" re
     }
 
     .form-group label {
-        margin-bottom: 0.5rem;
-        font-family: var(--font-mono);
-        font-size: 0.875rem;
+        margin-bottom: var(--space-2);
+        font-size: 0.9rem;
         color: var(--text-secondary);
+        font-weight: 700;
     }
 
     .form-group input,
     .form-group textarea {
-        background-color: var(--bg-primary);
+        background-color: var(--bg-secondary);
         border: 1px solid var(--border);
-        border-radius: 4px;
-        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        padding: var(--space-3) var(--space-4);
         font-family: var(--font-sans);
-        font-size: 0.95rem;
+        font-size: 1rem;
         color: var(--text-primary);
         transition:
             border-color 0.2s ease,
             box-shadow 0.2s ease;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: var(--text-secondary);
+        opacity: 0.7;
     }
 
     .form-group input:focus,
     .form-group textarea:focus {
         outline: none;
         border-color: var(--accent);
-        box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.3);
+        box-shadow: 0 0 0 3px rgba(78, 154, 255, 0.2);
     }
 
     .form-group textarea {
         resize: vertical;
-        min-height: 120px;
+        min-height: 140px;
+        line-height: 1.6;
     }
 
     .contact-form button {
-        background-color: var(--accent);
+        background: linear-gradient(
+            90deg,
+            var(--accent) 0%,
+            var(--syntax-function) 100%
+        );
         color: var(--bg-primary);
         border: none;
-        border-radius: 4px;
-        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        padding: var(--space-3) var(--space-6);
         font-family: var(--font-mono);
-        font-size: 0.9rem;
+        font-size: 1rem;
+        font-weight: 700;
         cursor: pointer;
         transition:
-            background-color 0.2s ease,
-            transform 0.1s ease;
+            transform 0.15s ease,
+            box-shadow 0.2s ease,
+            opacity 0.2s ease;
         align-self: flex-start;
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: var(--space-3);
+        box-shadow: 0 3px 8px rgba(78, 154, 255, 0.3);
     }
 
     .contact-form button:hover {
-        background-color: #7eb6ff;
+        opacity: 0.9;
+        box-shadow: 0 5px 12px rgba(78, 154, 255, 0.4);
     }
     .contact-form button:active {
-        transform: scale(0.98);
+        transform: scale(0.97);
+        box-shadow: 0 2px 5px rgba(78, 154, 255, 0.3);
+    }
+    .contact-form button svg {
+        stroke: var(--bg-primary);
     }
 </style>

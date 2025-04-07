@@ -7,4 +7,5 @@ export interface Project {
 
 export interface LayoutProps {
     title: string;
+    currentPath: string;
 }
