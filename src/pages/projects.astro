@@ -1,58 +1,57 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import type { Project } from "../types";
 
-const projects = [
+const projects: Project[] = [
     {
-        title: "Astro Portfolio",
+        title: "Flux: Music Streaming Site",
         description:
-            "A minimalistic portfolio built with Astro and vanilla CSS.",
-        link: "https://github.com/yourusername/astro-portfolio",
-        tags: ["Astro", "CSS", "Responsive"],
+            "Music streaming site built with React and Node.js. Features user authentication, playlist management, and a sleek UI.",
+        link: "https://github.com/roshan-parida/flux",
+        tags: ["Vitejs", "Javascript", "MERN", "Nodejs", "Render"],
     },
     {
-        title: "Code Playground",
+        title: "PriceWatch: Automated price-tracking",
         description:
-            "An interactive playground to experiment with code and design.",
+            "Automated price-tracking tool that monitors product prices and sends notifications when they drop below a certain threshold.",
         link: "https://github.com/yourusername/code-playground",
-        tags: ["JavaScript", "HTML5", "CSS3"],
+        tags: ["Nextjs", "Web Scraping", "Web APIs"],
     },
     {
-        title: "Task Tracker",
+        title: "Sentinel: Smart Home Security System",
         description:
-            "A productivity app to manage tasks with priority levels and deadlines.",
-        link: "https://github.com/yourusername/task-tracker",
-        tags: ["React", "LocalStorage", "UI/UX"],
-    },
-    {
-        title: "Weather Dashboard",
-        description:
-            "A weather application showing current conditions and forecasts.",
-        link: "https://github.com/yourusername/weather-app",
-        tags: ["API", "JavaScript", "CSS Grid"],
-    },
-    {
-        title: "Dev Blog",
-        description:
-            "A technical blog built with Astro and Markdown for sharing programming insights.",
-        link: "https://github.com/yourusername/dev-blog",
-        tags: ["Astro", "Markdown", "Blog"],
-    },
-    {
-        title: "CLI Tool",
-        description:
-            "A command-line utility for automating development workflows.",
-        link: "https://github.com/yourusername/cli-tool",
-        tags: ["Node.js", "CLI", "Automation"],
+            "Smart home security system that uses IoT devices to monitor and secure your home. Features real-time alerts and remote access.",
+        link: "https://github.com/roshan-parida/sentinel",
+        tags: ["Vanilla", "Nodejs", "Express", "IoT"],
     },
 ];
 ---
 
 <Layout title="Projects">
-    <h2>// My_Projects</h2>
-    <p>A collection of development projects I've worked on.</p>
+    <h1>// My Projects</h1>
+    <p>
+        Here's a selection of projects I've worked on. You can find more on my <a
+            href="https://github.com/roshan-parida"
+            target="_blank"
+            rel="noopener noreferrer">GitHub profile</a
+        >.
+    </p>
 
     <div class="project-grid">
-        {projects.map((project) => <ProjectCard project={project} />)}
+        {
+            projects.map((project, index) => (
+                <ProjectCard project={project} index={index} />
+            ))
+        }
     </div>
 </Layout>
+
+<style>
+    h1 + p {
+        margin-top: -1rem;
+        margin-bottom: 2.5rem;
+        color: var(--text-secondary);
+        max-width: 70ch;
+    }
+</style>

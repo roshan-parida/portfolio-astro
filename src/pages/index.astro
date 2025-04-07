@@ -1,84 +1,81 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import type { Project } from "../types";
+
+const featuredProject: Project = {
+    title: "Flux: Music Streaming Site",
+    description:
+        "Music streaming site built with React and Node.js. Features user authentication, playlist management, and a sleek UI.",
+    link: "https://github.com/roshan-parida/flux",
+    tags: ["Vitejs", "Javascript", "MERN", "Nodejs"],
+};
 ---
 
 <Layout title="Home">
-    <div class="terminal-container">
-        <div class="terminal-header">
-            <div class="terminal-dots">
-                <div class="terminal-dot red"></div>
-                <div class="terminal-dot yellow"></div>
-                <div class="terminal-dot green"></div>
-            </div>
-            <div class="terminal-title">portfolio.dev</div>
-        </div>
-        <div class="terminal-body">
-            <p class="typewriter-text">Welcome to my developer portfolio...</p>
-            <p>
-                I'm a <span class="accent">developer</span> passionate about building
-                tools, writing <span class="accent">clean code</span>, and
-                creating engaging web experiences.
-            </p>
-            <p class="loading">Loading next project</p>
-        </div>
-    </div>
-
-    <section>
-        <h2>// About Me</h2>
-        <p>
-            Hi there! I'm a developer with a focus on creating efficient,
-            elegant solutions. I love exploring new technologies and
-            implementing best practices in my work.
+    <section class="hero">
+        <h1>Hi, I'm Roshan Parida</h1>
+        <p class="typewriter-text">
+            Aspiring Developer | BCA Student | Tech Enthusiast
         </p>
-        <p>
-            <a href="/about" class="inline-link">Learn more about me →</a>
+        <p class="intro-text">
+            Exploring the world of code and building cool things for the web.
+            Currently focused on expanding my skills in web development and
+            software engineering. Based in Delhi, India.
         </p>
+        <a href="/about" class="inline-link">Learn more about me</a>
     </section>
 
     <section>
-        <h2>// Featured Projects</h2>
-        <div class="featured-project">
-            <h3>Astro Portfolio</h3>
-            <p>
-                A minimalistic, code-themed portfolio built with Astro and
-                custom CSS.
-            </p>
-            <a href="/projects" class="inline-link">View all projects →</a>
+        <h2>// Featured Project</h2>
+        <ProjectCard project={featuredProject} />
+        <div class="view-all-link">
+            <a href="/projects" class="inline-link">View all projects</a>
         </div>
     </section>
+
+    <!-- <section>
+        <h2>// Latest Thoughts (Optional Blog Teaser)</h2>
+        <p>
+            Check out my latest blog post about [Topic]... <a
+                href="/blog"
+                class="inline-link">Read more</a
+            >
+        </p>
+    </section> -->
 </Layout>
 
 <style>
-    .accent {
-        color: var(--accent);
-        font-weight: bold;
+    .hero {
+        text-align: center;
+        padding: 2rem 0 3rem 0;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 3rem;
     }
 
-    .inline-link {
-        color: var(--accent);
-        text-decoration: none;
-        font-family: var(--font-mono);
-        display: inline-flex;
-        align-items: center;
-        transition: all 0.2s ease;
+    .hero h1 {
+        color: var(--text-primary);
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-family: var(--font-sans);
+        border-bottom: none;
     }
 
-    .inline-link:hover {
-        color: #7eb6ff;
-        transform: translateX(3px);
+    .intro-text {
+        max-width: 600px;
+        margin: 0 auto 1.5rem auto;
+        color: var(--text-secondary);
+        font-size: 1rem;
+        line-height: 1.7;
     }
 
-    .featured-project {
-        background-color: var(--bg-secondary);
-        border: 1px solid var(--border);
-        border-radius: 6px;
-        padding: 1.5rem;
-        margin-top: 1rem;
+    .view-all-link {
+        margin-top: 1.5rem;
+        text-align: right;
     }
 
-    .featured-project h3 {
-        color: var(--accent);
-        font-family: var(--font-mono);
-        margin-bottom: 0.5rem;
+    .typewriter-text {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
     }
 </style>

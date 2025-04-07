@@ -2,116 +2,250 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Contact">
-    <h2>// Contact_Me</h2>
+<Layout title="Contact Me">
+    <h1>// Get In Touch</h1>
 
-    <div class="terminal-container">
-        <div class="terminal-header">
-            <div class="terminal-dots">
-                <div class="terminal-dot red"></div>
-                <div class="terminal-dot yellow"></div>
-                <div class="terminal-dot green"></div>
+    <div class="contact-container">
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                </div>
+                <div class="terminal-title">contact.sh</div>
             </div>
-            <div class="terminal-title">contact.sh</div>
+            <div class="terminal-body">
+                <p>
+                    <span class="prompt">$</span>
+                    <span class="command">echo</span>
+                    <span class="string">"Let's connect!"</span>
+                </p>
+                <p>
+                    <span class="prompt">$</span>
+                    <span class="command">cat</span> contact_info.txt
+                </p>
+                <pre><code>
+Email:    <a href="mailto:roshanparida24@gmail.com">roshanparida24@gmail.com</a>
+GitHub:   <a href="https://github.com/roshan-parida" target="_blank" rel="noopener noreferrer">github.com/roshan-parida</a>
+LinkedIn: <a href="https://www.linkedin.com/in/roshan-parida" target="_blank" rel="noopener noreferrer">linkedin.com/in/roshan-parida</a>
+        </code></pre>
+            </div>
         </div>
-        <div class="terminal-body">
-            <p>$ <span class="accent">echo</span> "Let's connect!"</p>
-            <p>$ <span class="accent">cat</span> contact_info.txt</p>
-            <pre>
-                <code>
-                    Email: dev@example.com
-                    GitHub: github.com/yourusername
-                    LinkedIn: linkedin.com/in/yourusername
-                </code>
-            </pre>
-        </div>
-    </div>
 
-    <div class="contact-form">
-        <h3>Send a message</h3>
-        <form>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required />
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required />
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="5" required
-                ></textarea>
-            </div>
-            <button type="submit">Send Message</button>
-        </form>
+        <div class="contact-form-container">
+            <h2>Send a Message</h2>
+            <form
+                class="contact-form"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+            >
+                <input type="hidden" name="form-name" value="contact" />
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required
+                    ></textarea>
+                </div>
+                <button type="submit"
+                    >Send Message <span aria-hidden="true">→</span></button
+                >
+            </form>
+        </div>
     </div>
 </Layout>
 
 <style>
-    .accent {
+    .contact-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        margin-top: 2rem;
+    }
+
+    @media (min-width: 800px) {
+        .contact-container {
+            grid-template-columns: 1fr 1fr;
+            align-items: start;
+        }
+    }
+
+    /* Terminal Styles */
+    .terminal-container {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        background-color: var(--bg-secondary);
+    }
+
+    .terminal-header {
+        background-color: var(--bg-primary);
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-dots {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .terminal-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+    .terminal-dot.red {
+        background-color: #ff5f56;
+    }
+    .terminal-dot.yellow {
+        background-color: #ffbd2e;
+    }
+    .terminal-dot.green {
+        background-color: #27c93f;
+    }
+
+    .terminal-title {
+        flex-grow: 1;
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        padding-right: 36px;
+    }
+
+    .terminal-body {
+        padding: 1.5rem;
+        font-family: var(--font-mono);
+        position: relative;
+        color: var(--text-primary);
+    }
+
+    .terminal-body p {
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5ch;
+    }
+
+    .terminal-body .prompt {
+        color: var(--accent);
+        font-weight: bold;
+    }
+    .terminal-body .command {
         color: var(--syntax-keyword);
+    }
+    .terminal-body .string {
+        color: var(--syntax-string);
+    }
+
+    .terminal-body pre {
+        margin: 1rem 0 0 0;
+        padding: 1rem;
+        background-color: var(--bg-primary);
+        border: none;
+        border-radius: 4px;
+    }
+
+    .terminal-body pre code {
+        font-size: 0.85rem;
+        line-height: 1.6;
+        color: var(--text-secondary);
+    }
+    .terminal-body pre code a {
+        color: var(--accent);
+        text-decoration: underline;
+    }
+    .terminal-body pre code a:hover {
+        color: #7eb6ff;
+    }
+
+    /* Contact Form Styles */
+    .contact-form-container h2 {
+        color: var(--accent);
+        font-family: var(--font-mono);
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.75rem;
+        font-size: 1.5rem;
     }
 
     .contact-form {
-        background-color: var(--bg-secondary);
-        border-radius: 6px;
-        padding: 1.5rem;
-        margin-top: 2rem;
-        border: 1px solid var(--border);
-    }
-
-    .contact-form h3 {
-        font-family: var(--font-mono);
-        color: var(--accent);
-        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
     }
 
     .form-group {
-        margin-bottom: 1.25rem;
+        display: flex;
+        flex-direction: column;
     }
 
     .form-group label {
-        display: block;
         margin-bottom: 0.5rem;
         font-family: var(--font-mono);
         font-size: 0.875rem;
         color: var(--text-secondary);
     }
 
-    input,
-    textarea {
-        width: 100%;
-        padding: 0.75rem;
+    .form-group input,
+    .form-group textarea {
         background-color: var(--bg-primary);
         border: 1px solid var(--border);
         border-radius: 4px;
+        padding: 0.75rem 1rem;
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
         color: var(--text-primary);
-        font-family: var(--font-mono);
-        font-size: 0.875rem;
-        transition: border-color 0.2s ease;
+        transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
     }
 
-    input:focus,
-    textarea:focus {
+    .form-group input:focus,
+    .form-group textarea:focus {
         outline: none;
         border-color: var(--accent);
-        box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+        box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.3);
     }
 
-    button {
+    .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .contact-form button {
         background-color: var(--accent);
-        color: #fff;
+        color: var(--bg-primary);
         border: none;
         border-radius: 4px;
         padding: 0.75rem 1.5rem;
         font-family: var(--font-mono);
-        font-size: 0.875rem;
+        font-size: 0.9rem;
         cursor: pointer;
-        transition: background-color 0.2s ease;
+        transition:
+            background-color 0.2s ease,
+            transform 0.1s ease;
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
     }
 
-    button:hover {
-        background-color: #4590e6;
+    .contact-form button:hover {
+        background-color: #7eb6ff;
+    }
+    .contact-form button:active {
+        transform: scale(0.98);
     }
 </style>
