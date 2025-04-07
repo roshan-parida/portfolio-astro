@@ -1,0 +1,58 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const projects = [
+    {
+        title: "Astro Portfolio",
+        description:
+            "A minimalistic portfolio built with Astro and vanilla CSS.",
+        link: "https://github.com/yourusername/astro-portfolio",
+        tags: ["Astro", "CSS", "Responsive"],
+    },
+    {
+        title: "Code Playground",
+        description:
+            "An interactive playground to experiment with code and design.",
+        link: "https://github.com/yourusername/code-playground",
+        tags: ["JavaScript", "HTML5", "CSS3"],
+    },
+    {
+        title: "Task Tracker",
+        description:
+            "A productivity app to manage tasks with priority levels and deadlines.",
+        link: "https://github.com/yourusername/task-tracker",
+        tags: ["React", "LocalStorage", "UI/UX"],
+    },
+    {
+        title: "Weather Dashboard",
+        description:
+            "A weather application showing current conditions and forecasts.",
+        link: "https://github.com/yourusername/weather-app",
+        tags: ["API", "JavaScript", "CSS Grid"],
+    },
+    {
+        title: "Dev Blog",
+        description:
+            "A technical blog built with Astro and Markdown for sharing programming insights.",
+        link: "https://github.com/yourusername/dev-blog",
+        tags: ["Astro", "Markdown", "Blog"],
+    },
+    {
+        title: "CLI Tool",
+        description:
+            "A command-line utility for automating development workflows.",
+        link: "https://github.com/yourusername/cli-tool",
+        tags: ["Node.js", "CLI", "Automation"],
+    },
+];
+---
+
+<Layout title="Projects">
+    <h2>// My_Projects</h2>
+    <p>A collection of development projects I've worked on.</p>
+
+    <div class="project-grid">
+        {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+</Layout>

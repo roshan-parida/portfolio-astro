@@ -1,0 +1,41 @@
+---
+export interface Props {
+    title: string;
+}
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title} | Dev Portfolio</title>
+        <link rel="stylesheet" href="/src/styles/global.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <header>
+            <h1>Dev_Portfolio</h1>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/projects">Projects</a>
+                <a href="/contact">Contact</a>
+            </nav>
+        </header>
+        <main>
+            <slot />
+        </main>
+        <footer>
+            <span
+                >© {new Date().getFullYear()} Dev_Portfolio // All rights reserved</span
+            >
+        </footer>
+    </body>
+</html>

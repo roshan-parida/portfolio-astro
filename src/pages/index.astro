@@ -1,0 +1,84 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Home">
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-dots">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+            </div>
+            <div class="terminal-title">portfolio.dev</div>
+        </div>
+        <div class="terminal-body">
+            <p class="typewriter-text">Welcome to my developer portfolio...</p>
+            <p>
+                I'm a <span class="accent">developer</span> passionate about building
+                tools, writing <span class="accent">clean code</span>, and
+                creating engaging web experiences.
+            </p>
+            <p class="loading">Loading next project</p>
+        </div>
+    </div>
+
+    <section>
+        <h2>// About Me</h2>
+        <p>
+            Hi there! I'm a developer with a focus on creating efficient,
+            elegant solutions. I love exploring new technologies and
+            implementing best practices in my work.
+        </p>
+        <p>
+            <a href="/about" class="inline-link">Learn more about me →</a>
+        </p>
+    </section>
+
+    <section>
+        <h2>// Featured Projects</h2>
+        <div class="featured-project">
+            <h3>Astro Portfolio</h3>
+            <p>
+                A minimalistic, code-themed portfolio built with Astro and
+                custom CSS.
+            </p>
+            <a href="/projects" class="inline-link">View all projects →</a>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .accent {
+        color: var(--accent);
+        font-weight: bold;
+    }
+
+    .inline-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.2s ease;
+    }
+
+    .inline-link:hover {
+        color: #7eb6ff;
+        transform: translateX(3px);
+    }
+
+    .featured-project {
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .featured-project h3 {
+        color: var(--accent);
+        font-family: var(--font-mono);
+        margin-bottom: 0.5rem;
+    }
+</style>

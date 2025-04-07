@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const skills = [
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Astro",
+    "Node.js",
+    "Git",
+    "Responsive Design",
+    "UI/UX",
+    "Linux",
+    "VS Code",
+];
+---
+
+<Layout title="About">
+    <h2>// About_Me</h2>
+
+    <div class="about-container">
+        <div class="about-image">
+            <div class="profile-placeholder"></div>
+            <h3>Developer</h3>
+            <p style="color: var(--text-secondary);">
+                Building digital experiences
+            </p>
+        </div>
+
+        <div class="about-content">
+            <p>
+                I'm a developer who loves to explore new technologies and share
+                my knowledge. With a background in Computer Applications, I'm
+                passionate about creating efficient, elegant solutions to
+                complex problems.
+            </p>
+
+            <p>
+                When I'm not coding, you can find me reading manga, watching
+                anime, or exploring new games. I believe that these creative
+                outlets help fuel my programming creativity as well.
+            </p>
+
+            <h3
+                style="margin-top: 2rem; font-family: var(--font-mono); color: var(--accent);"
+            >
+                // Skills
+            </h3>
+
+            <div style="margin-top: 1rem;">
+                {skills.map((skill) => <span class="skill-tag">{skill}</span>)}
+            </div>
+        </div>
+    </div>
+</Layout>
